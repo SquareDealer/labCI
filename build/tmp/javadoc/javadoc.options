@@ -1,0 +1,8 @@
+-classpath '/Users/nikiforovivan/Desktop/ITMO/labs/java/SquareDealer/build/classes/java/main:/Users/nikiforovivan/Desktop/ITMO/labs/java/SquareDealer/build/resources/main'
+-d '/Users/nikiforovivan/Desktop/ITMO/labs/java/SquareDealer/build/docs/javadoc'
+-doctitle '1lab 1.0-SNAPSHOT API'
+-private 
+-notimestamp 
+-quiet 
+-windowtitle '1lab 1.0-SNAPSHOT API'
+'/Users/nikiforovivan/Desktop/ITMO/labs/java/SquareDealer/src/main/java/org/example/Main.java'

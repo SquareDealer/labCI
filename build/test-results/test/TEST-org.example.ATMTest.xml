@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.ATMTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2025-03-15T15:11:33" hostname="MacBook-Air-Ivan.local" time="0.044">
+  <properties/>
+  <testcase name="depositShouldThrowInvalidAmountExceptionForZeroAmount()" classname="org.example.ATMTest" time="0.018"/>
+  <testcase name="depositShouldThrowAccountNotFoundExceptionWhenNoAccount()" classname="org.example.ATMTest" time="0.001"/>
+  <testcase name="getTransactionHistoryShouldThrowAccountNotFoundExceptionWhenNoAccount()" classname="org.example.ATMTest" time="0.001"/>
+  <testcase name="withdrawShouldThrowInvalidAmountExceptionForNegativeAmount()" classname="org.example.ATMTest" time="0.001"/>
+  <testcase name="checkBalanceShouldThrowAccountNotFoundExceptionWhenNoAccount()" classname="org.example.ATMTest" time="0.001"/>
+  <testcase name="withdrawShouldThrowInsufficientFundsExceptionWhenNotEnoughMoney()" classname="org.example.ATMTest" time="0.008"/>
+  <testcase name="getTransactionHistoryShouldReturnTransactionsAfterOperations()" classname="org.example.ATMTest" time="0.001"/>
+  <testcase name="depositShouldThrowInvalidAmountExceptionForNegativeAmount()" classname="org.example.ATMTest" time="0.0"/>
+  <testcase name="getTransactionHistoryShouldReturnEmptyListForNewAccount()" classname="org.example.ATMTest" time="0.0"/>
+  <testcase name="checkBalanceShouldReturnZeroForNewAccount()" classname="org.example.ATMTest" time="0.0"/>
+  <testcase name="withdrawShouldWorkWithValidAmount()" classname="org.example.ATMTest" time="0.0"/>
+  <testcase name="withdrawShouldThrowInvalidAmountExceptionForZeroAmount()" classname="org.example.ATMTest" time="0.0"/>
+  <testcase name="depositShouldWorkWithValidAmount()" classname="org.example.ATMTest" time="0.0"/>
+  <testcase name="withdrawShouldThrowAccountNotFoundExceptionWhenNoAccount()" classname="org.example.ATMTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
