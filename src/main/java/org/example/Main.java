@@ -87,7 +87,7 @@ class Account {
      * @param accountNumber Номер счета.
      */
     public Account(String accountNumber) {
-        this.balance = 500.0;
+        this.balance = 0.0;
         this.accountNumber = accountNumber;
         this.transactions = new ArrayList<>();
     }
