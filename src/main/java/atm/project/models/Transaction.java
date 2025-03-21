@@ -1,12 +1,13 @@
-package atm.project;
+package atm.project.models;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
  * Представляет банковскую транзакцию.
  */
 public class Transaction {
-    private final double amount;
+    private final BigDecimal amount;
     private final LocalDateTime dateTime;
     private final String type;
 
@@ -15,7 +16,7 @@ public class Transaction {
      * @param amount Сумма транзакции.
      * @param type Тип транзакции (Deposit или Withdrawal).
      */
-    public Transaction(double amount, String type) {
+    public Transaction(BigDecimal amount, String type) {
         this.amount = amount;
         this.dateTime = LocalDateTime.now();
         this.type = type;

@@ -23,10 +23,6 @@ test {
     useJUnitPlatform()
 }
 
-javadoc {
-    options.memberLevel = JavadocMemberLevel.PRIVATE
-}
-
 java {
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21

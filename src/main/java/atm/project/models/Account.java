@@ -1,14 +1,16 @@
-package atm.project;
+package atm.project.models;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
 import atm.project.exception.*;
 
 /**
  * Представляет банковский счет.
  */
 public class Account {
-    private double balance;
+    private BigDecimal balance;
     private final List<Transaction> transactions;
     private final String accountNumber;
 
@@ -17,7 +19,7 @@ public class Account {
      * @param accountNumber Номер счета.
      */
     public Account(String accountNumber) {
-        this.balance = 0.0;
+        this.balance = BigDecimal.ZERO;
         this.accountNumber = accountNumber;
         this.transactions = new ArrayList<>();
     }
@@ -26,7 +28,7 @@ public class Account {
      * Возвращает текущий баланс счета.
      * @return Текущий баланс счета.
      */
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
@@ -43,11 +45,11 @@ public class Account {
      * @param amount Сумма для пополнения.
      * @throws InvalidAmountException Если сумма меньше или равна 0.
      */
-    public void deposit(double amount) throws InvalidAmountException {
-        if (amount <= 0) {
+    public void deposit(BigDecimal amount) throws InvalidAmountException {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new InvalidAmountException("Deposit amount must be positive");
         }
-        balance += amount;
+        balance = balance.add(amount);
         transactions.add(new Transaction(amount, "Deposit"));
     }
 
@@ -57,16 +59,16 @@ public class Account {
      * @throws InvalidAmountException Если сумма меньше или равна 0.
      * @throws InsufficientFundsException Если недостаточно средств на счете.
      */
-    public void withdraw(double amount) throws InvalidAmountException, InsufficientFundsException {
-        if (amount <= 0) {
+    public void withdraw(BigDecimal amount) throws InvalidAmountException, InsufficientFundsException {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new InvalidAmountException("Withdrawal amount must be positive");
         }
-        if (amount > balance) {
+        if (amount.compareTo(balance) > 0) {
             throw new InsufficientFundsException(
-                    String.format("Insufficient funds. Current balance: %.2f, Requested: %.2f",
+                    String.format("Insufficient funds. Current balance: %s, Requested: %s",
                             balance, amount));
         }
-        balance -= amount;
+        balance = balance.subtract(amount);
         transactions.add(new Transaction(amount, "Withdrawal"));
     }
 

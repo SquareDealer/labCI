@@ -1,9 +1,12 @@
 package atm.project;
 
+import atm.project.models.Transaction;
+import atm.project.service.ATMService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import atm.project.exception.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,48 +23,48 @@ class ATMServiceTests {
     @Test
     void depositShouldThrowInvalidAmountExceptionForNegativeAmount() {
         atm.createAccount("12345");
-        Exception exception = assertThrows(InvalidAmountException.class, () -> atm.deposit(-100.0));
+        Exception exception = assertThrows(InvalidAmountException.class, () -> atm.deposit(new BigDecimal("-100.0")));
         assertEquals("Deposit amount must be positive", exception.getMessage());
     }
 
     @Test
     void depositShouldThrowInvalidAmountExceptionForZeroAmount() {
         atm.createAccount("12345");
-        Exception exception = assertThrows(InvalidAmountException.class, () -> atm.deposit(0.0));
+        Exception exception = assertThrows(InvalidAmountException.class, () -> atm.deposit(BigDecimal.ZERO));
         assertEquals("Deposit amount must be positive", exception.getMessage());
     }
 
     @Test
     void depositShouldThrowAccountNotFoundExceptionWhenNoAccount() {
-        Exception exception = assertThrows(AccountNotFoundException.class, () -> atm.deposit(100.0));
+        Exception exception = assertThrows(AccountNotFoundException.class, () -> atm.deposit(new BigDecimal("100.0")));
         assertEquals("No account found. Please create an account first.", exception.getMessage());
     }
 
     @Test
     void depositShouldWorkWithValidAmount() throws AccountNotFoundException, InvalidAmountException {
         atm.createAccount("12345");
-        atm.deposit(100.0);
-        assertEquals(100.0, atm.checkBalance());
+        atm.deposit(new BigDecimal("100.0"));
+        assertEquals(new BigDecimal("100.0"), atm.checkBalance());
     }
 
     // Тесты для Account.withdraw
     @Test
     void withdrawShouldThrowInvalidAmountExceptionForNegativeAmount() {
         atm.createAccount("12345");
-        Exception exception = assertThrows(InvalidAmountException.class, () -> atm.withdraw(-100.0));
+        Exception exception = assertThrows(InvalidAmountException.class, () -> atm.withdraw(new BigDecimal("-100.0")));
         assertEquals("Withdrawal amount must be positive", exception.getMessage());
     }
 
     @Test
     void withdrawShouldThrowInvalidAmountExceptionForZeroAmount() {
         atm.createAccount("12345");
-        Exception exception = assertThrows(InvalidAmountException.class, () -> atm.withdraw(0.0));
+        Exception exception = assertThrows(InvalidAmountException.class, () -> atm.withdraw(BigDecimal.ZERO));
         assertEquals("Withdrawal amount must be positive", exception.getMessage());
     }
 
     @Test
     void withdrawShouldThrowAccountNotFoundExceptionWhenNoAccount() {
-        Exception exception = assertThrows(AccountNotFoundException.class, () -> atm.withdraw(100.0));
+        Exception exception = assertThrows(AccountNotFoundException.class, () -> atm.withdraw(new BigDecimal("100.0")));
         assertEquals("No account found. Please create an account first.", exception.getMessage());
     }
 
@@ -69,8 +72,8 @@ class ATMServiceTests {
     void withdrawShouldThrowInsufficientFundsExceptionWhenNotEnoughMoney()
             throws AccountNotFoundException, InvalidAmountException {
         atm.createAccount("12345");
-        atm.deposit(50.0);
-        Exception exception = assertThrows(InsufficientFundsException.class, () -> atm.withdraw(100.0));
+        atm.deposit(new BigDecimal("50.0"));
+        Exception exception = assertThrows(InsufficientFundsException.class, () -> atm.withdraw(new BigDecimal("100.0")));
         assertTrue(exception.getMessage().contains("Insufficient funds"));
     }
 
@@ -78,9 +81,9 @@ class ATMServiceTests {
     void withdrawShouldWorkWithValidAmount()
             throws AccountNotFoundException, InvalidAmountException, InsufficientFundsException {
         atm.createAccount("12345");
-        atm.deposit(100.0);
-        atm.withdraw(50.0);
-        assertEquals(50.0, atm.checkBalance());
+        atm.deposit(new BigDecimal("100.0"));
+        atm.withdraw(new BigDecimal("50.0"));
+        assertEquals(new BigDecimal("50.0"), atm.checkBalance());
     }
 
     // Тесты для checkBalance
@@ -93,7 +96,7 @@ class ATMServiceTests {
     @Test
     void checkBalanceShouldReturnZeroForNewAccount() throws AccountNotFoundException {
         atm.createAccount("12345");
-        assertEquals(0.0, atm.checkBalance());
+        assertEquals(BigDecimal.ZERO, atm.checkBalance());
     }
 
     // Тесты для getTransactionHistory
@@ -114,8 +117,8 @@ class ATMServiceTests {
     void getTransactionHistoryShouldReturnTransactionsAfterOperations()
             throws AccountNotFoundException, InvalidAmountException, InsufficientFundsException {
         atm.createAccount("12345");
-        atm.deposit(100.0);
-        atm.withdraw(50.0);
+        atm.deposit(new BigDecimal("100.0"));
+        atm.withdraw(new BigDecimal("50.0"));
         List<Transaction> history = atm.getTransactionHistory();
         assertEquals(2, history.size());
         assertTrue(history.get(0).toString().contains("Deposit"));

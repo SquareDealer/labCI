@@ -1,7 +1,10 @@
-package atm.project;
+package atm.project.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import atm.project.exception.*;
+import atm.project.models.Account;
+import atm.project.models.Transaction;
 
 /**
  * Реализует функциональность банкомата.
@@ -22,7 +25,7 @@ public class ATMService {
      * @return Текущий баланс счета.
      * @throws AccountNotFoundException Если счет не создан.
      */
-    public double checkBalance() throws AccountNotFoundException {
+    public BigDecimal checkBalance() throws AccountNotFoundException {
         if (account == null) {
             throw new AccountNotFoundException("No account found. Please create an account first.");
         }
@@ -35,7 +38,7 @@ public class ATMService {
      * @throws AccountNotFoundException Если счет не создан.
      * @throws InvalidAmountException Если сумма меньше или равна 0.
      */
-    public void deposit(double amount) throws AccountNotFoundException, InvalidAmountException {
+    public void deposit(BigDecimal amount) throws AccountNotFoundException, InvalidAmountException {
         if (account == null) {
             throw new AccountNotFoundException("No account found. Please create an account first.");
         }
@@ -49,7 +52,7 @@ public class ATMService {
      * @throws InvalidAmountException Если сумма меньше или равна 0.
      * @throws InsufficientFundsException Если недостаточно средств.
      */
-    public void withdraw(double amount) throws AccountNotFoundException, InvalidAmountException, InsufficientFundsException {
+    public void withdraw(BigDecimal amount) throws AccountNotFoundException, InvalidAmountException, InsufficientFundsException {
         if (account == null) {
             throw new AccountNotFoundException("No account found. Please create an account first.");
         }

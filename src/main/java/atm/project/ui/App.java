@@ -1,7 +1,11 @@
-package atm.project;
+package atm.project.ui;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
+
+import atm.project.service.ATMService;
+import atm.project.models.Transaction;
 import atm.project.exception.*;
 
 public class App {
@@ -70,19 +74,20 @@ public class App {
     }
 
     private static void checkBalance() throws AccountNotFoundException {
-        double balance = atm.checkBalance();
-        System.out.printf("Current balance: %.2f%n", balance);
+        BigDecimal balance = atm.checkBalance();
+        System.out.printf("Current balance: %s%n", balance);
     }
 
     private static void deposit() throws AccountNotFoundException, InvalidAmountException {
         System.out.print("Enter amount to deposit: ");
         try {
-            double amount = Double.parseDouble(scanner.nextLine().trim());
+            BigDecimal amount = scanner.nextBigDecimal();
+            scanner.nextLine();
             atm.deposit(amount);
-            System.out.printf("Successfully deposited %.2f. New balance: %.2f%n",
-                    amount, atm.checkBalance());
-        } catch (NumberFormatException e) {
-            throw new InvalidAmountException("Invalid amount format");
+            System.out.printf("Successfully deposited %s. New balance: %s%n", amount, atm.checkBalance());
+        } catch (java.util.InputMismatchException e) {
+            scanner.nextLine();
+            throw new InvalidAmountException("Invalid amount format. Please enter a valid number.");
         }
     }
 
@@ -90,11 +95,12 @@ public class App {
             throws AccountNotFoundException, InvalidAmountException, InsufficientFundsException {
         System.out.print("Enter amount to withdraw: ");
         try {
-            double amount = Double.parseDouble(scanner.nextLine().trim());
+            BigDecimal amount = scanner.nextBigDecimal();
+            scanner.nextLine();
             atm.withdraw(amount);
-            System.out.printf("Successfully withdrew %.2f. New balance: %.2f%n",
-                    amount, atm.checkBalance());
+            System.out.printf("Successfully withdrew %s. New balance: %s%n", amount, atm.checkBalance());
         } catch (NumberFormatException e) {
+            scanner.nextLine();
             throw new InvalidAmountException("Invalid amount format");
         }
     }
