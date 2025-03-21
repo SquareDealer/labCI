@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 /**
  * Представляет банковскую транзакцию.
  */
-class Transaction {
+public class Transaction {
     private final double amount;
     private final LocalDateTime dateTime;
     private final String type;

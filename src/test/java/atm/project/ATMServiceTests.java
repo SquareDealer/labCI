@@ -20,26 +20,20 @@ class ATMServiceTests {
     @Test
     void depositShouldThrowInvalidAmountExceptionForNegativeAmount() {
         atm.createAccount("12345");
-        Exception exception = assertThrows(InvalidAmountException.class, () -> {
-            atm.deposit(-100.0);
-        });
+        Exception exception = assertThrows(InvalidAmountException.class, () -> atm.deposit(-100.0));
         assertEquals("Deposit amount must be positive", exception.getMessage());
     }
 
     @Test
     void depositShouldThrowInvalidAmountExceptionForZeroAmount() {
         atm.createAccount("12345");
-        Exception exception = assertThrows(InvalidAmountException.class, () -> {
-            atm.deposit(0.0);
-        });
+        Exception exception = assertThrows(InvalidAmountException.class, () -> atm.deposit(0.0));
         assertEquals("Deposit amount must be positive", exception.getMessage());
     }
 
     @Test
     void depositShouldThrowAccountNotFoundExceptionWhenNoAccount() {
-        Exception exception = assertThrows(AccountNotFoundException.class, () -> {
-            atm.deposit(100.0);
-        });
+        Exception exception = assertThrows(AccountNotFoundException.class, () -> atm.deposit(100.0));
         assertEquals("No account found. Please create an account first.", exception.getMessage());
     }
 
@@ -54,26 +48,20 @@ class ATMServiceTests {
     @Test
     void withdrawShouldThrowInvalidAmountExceptionForNegativeAmount() {
         atm.createAccount("12345");
-        Exception exception = assertThrows(InvalidAmountException.class, () -> {
-            atm.withdraw(-100.0);
-        });
+        Exception exception = assertThrows(InvalidAmountException.class, () -> atm.withdraw(-100.0));
         assertEquals("Withdrawal amount must be positive", exception.getMessage());
     }
 
     @Test
     void withdrawShouldThrowInvalidAmountExceptionForZeroAmount() {
         atm.createAccount("12345");
-        Exception exception = assertThrows(InvalidAmountException.class, () -> {
-            atm.withdraw(0.0);
-        });
+        Exception exception = assertThrows(InvalidAmountException.class, () -> atm.withdraw(0.0));
         assertEquals("Withdrawal amount must be positive", exception.getMessage());
     }
 
     @Test
     void withdrawShouldThrowAccountNotFoundExceptionWhenNoAccount() {
-        Exception exception = assertThrows(AccountNotFoundException.class, () -> {
-            atm.withdraw(100.0);
-        });
+        Exception exception = assertThrows(AccountNotFoundException.class, () -> atm.withdraw(100.0));
         assertEquals("No account found. Please create an account first.", exception.getMessage());
     }
 
@@ -82,9 +70,7 @@ class ATMServiceTests {
             throws AccountNotFoundException, InvalidAmountException {
         atm.createAccount("12345");
         atm.deposit(50.0);
-        Exception exception = assertThrows(InsufficientFundsException.class, () -> {
-            atm.withdraw(100.0);
-        });
+        Exception exception = assertThrows(InsufficientFundsException.class, () -> atm.withdraw(100.0));
         assertTrue(exception.getMessage().contains("Insufficient funds"));
     }
 
@@ -100,9 +86,7 @@ class ATMServiceTests {
     // Тесты для checkBalance
     @Test
     void checkBalanceShouldThrowAccountNotFoundExceptionWhenNoAccount() {
-        Exception exception = assertThrows(AccountNotFoundException.class, () -> {
-            atm.checkBalance();
-        });
+        Exception exception = assertThrows(AccountNotFoundException.class, () -> atm.checkBalance());
         assertEquals("No account found. Please create an account first.", exception.getMessage());
     }
 
@@ -115,9 +99,7 @@ class ATMServiceTests {
     // Тесты для getTransactionHistory
     @Test
     void getTransactionHistoryShouldThrowAccountNotFoundExceptionWhenNoAccount() {
-        Exception exception = assertThrows(AccountNotFoundException.class, () -> {
-            atm.getTransactionHistory();
-        });
+        Exception exception = assertThrows(AccountNotFoundException.class, () -> atm.getTransactionHistory());
         assertEquals("No account found. Please create an account first.", exception.getMessage());
     }
 
