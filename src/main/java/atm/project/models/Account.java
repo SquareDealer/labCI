@@ -2,6 +2,7 @@ package atm.project.models;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import atm.project.exception.*;
@@ -12,6 +13,7 @@ import atm.project.exception.*;
 public class Account {
     private BigDecimal balance;
     private final List<Transaction> transactions;
+    private final List<Transaction> transactionsReadOnlyView;
     private final String accountNumber;
 
     /**
@@ -22,6 +24,7 @@ public class Account {
         this.balance = BigDecimal.ZERO;
         this.accountNumber = accountNumber;
         this.transactions = new ArrayList<>();
+        this.transactionsReadOnlyView = Collections.unmodifiableList(transactions);
     }
 
     /**
@@ -50,7 +53,7 @@ public class Account {
             throw new InvalidAmountException("Deposit amount must be positive");
         }
         balance = balance.add(amount);
-        transactions.add(new Transaction(amount, "Deposit"));
+        transactions.add(new Transaction(amount, TransactionType.DEPOSIT));
     }
 
     /**
@@ -69,7 +72,7 @@ public class Account {
                             balance, amount));
         }
         balance = balance.subtract(amount);
-        transactions.add(new Transaction(amount, "Withdrawal"));
+        transactions.add(new Transaction(amount, TransactionType.WITHDRAWAL));
     }
 
     /**
@@ -77,6 +80,6 @@ public class Account {
      * @return Список транзакций.
      */
     public List<Transaction> getTransactionHistory() {
-        return new ArrayList<>(transactions);
+        return transactionsReadOnlyView;
     }
 }
