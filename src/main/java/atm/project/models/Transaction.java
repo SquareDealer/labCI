@@ -9,14 +9,14 @@ import java.time.LocalDateTime;
 public class Transaction {
     private final BigDecimal amount;
     private final LocalDateTime dateTime;
-    private final String type;
+    private final TransactionType type;
 
     /**
      * Создает новую транзакцию.
      * @param amount Сумма транзакции.
-     * @param type Тип транзакции (Deposit или Withdrawal).
+     * @param type Тип транзакции (DEPOSIT или WITHDRAWAL).
      */
-    public Transaction(BigDecimal amount, String type) {
+    public Transaction(BigDecimal amount, TransactionType type) {
         this.amount = amount;
         this.dateTime = LocalDateTime.now();
         this.type = type;
@@ -28,7 +28,11 @@ public class Transaction {
      */
     @Override
     public String toString() {
-        return String.format("%s: %s %.2f at %s",
-                type, type.equals("Withdrawal") ? "-" : "+", amount, dateTime);
+        return String.format("%s: %s%.2f at %s",
+                type,
+                type == TransactionType.WITHDRAWAL ? "-" : "+",
+                amount,
+                dateTime
+        );
     }
 }
