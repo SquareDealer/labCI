@@ -21,27 +21,16 @@ public class App {
 
             try {
                 switch (choice) {
-                    case "1":
-                        createAccount();
-                        break;
-                    case "2":
-                        checkBalance();
-                        break;
-                    case "3":
-                        deposit();
-                        break;
-                    case "4":
-                        withdraw();
-                        break;
-                    case "5":
-                        showTransactionHistory();
-                        break;
-                    case "6":
+                    case "1" -> createAccount();
+                    case "2" -> checkBalance();
+                    case "3" -> deposit();
+                    case "4" -> withdraw();
+                    case "5" -> showTransactionHistory();
+                    case "6" -> {
                         running = false;
                         System.out.println("Thank you for using our ATM. Goodbye!");
-                        break;
-                    default:
-                        System.out.println("Invalid option. Please try again.");
+                    }
+                    default -> System.out.println("Invalid option. Please try again.");
                 }
             } catch (AccountNotFoundException | InvalidAmountException | InsufficientFundsException e) {
                 System.out.println("Error: " + e.getMessage());
