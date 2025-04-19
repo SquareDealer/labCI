@@ -5,8 +5,8 @@ package atm.project.exception;
  */
 public class AccountNotFoundException extends Exception {
     /**
-     * Конструктор исключения.
-     * @param message Сообщение об ошибке.
+     * Конструктор исключения
+     * @param message Сообщение об ошибке
      */
     public AccountNotFoundException(String message) {
         super(message);

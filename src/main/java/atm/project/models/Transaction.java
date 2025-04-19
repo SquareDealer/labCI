@@ -14,7 +14,7 @@ public class Transaction {
     /**
      * Создает новую транзакцию.
      * @param amount Сумма транзакции.
-     * @param type Тип транзакции (DEPOSIT или WITHDRAWAL).
+     * @param type Тип транзакции.
      */
     public Transaction(BigDecimal amount, TransactionType type) {
         this.amount = amount;

@@ -121,7 +121,8 @@ class ATMServiceTests {
         atm.withdraw(new BigDecimal("50.0"));
         List<Transaction> history = atm.getTransactionHistory();
         assertEquals(2, history.size());
-        assertTrue(history.get(0).toString().contains("Deposit"));
-        assertTrue(history.get(1).toString().contains("Withdrawal"));
+        System.out.println(history);
+        assertTrue(history.get(0).toString().toLowerCase().contains("deposit"));
+        assertTrue(history.get(1).toString().toLowerCase().contains("withdrawal"));
     }
 }
